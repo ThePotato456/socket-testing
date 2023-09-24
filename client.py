@@ -54,7 +54,7 @@ def main():
             if config['commands']['help']['command'] in command:
                 if len(args) == 0:
                     for cmd in config['commands']:
-                        prints(f"\t{config['commands'][cmd]['command']}")
+                        prints(f"\t{config['commands'][cmd]['command']}\t{config['commands'][cmd]['description']}")
                         #printi(f"\tDescription: {config['commands'][cmd]['command']}")
                         #printi(f"\tUsage:        {config['commands'][cmd]['usage']}")
                     printi(f"Type '.help <command name> to find out more information on the usage'")

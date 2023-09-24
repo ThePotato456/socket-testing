@@ -13,15 +13,20 @@
         "usage": "Usage: .help",
         "description": "Shows this message"
       },
-      "connect": {
-        "command": ".connect",
-        "usage": "Usage: .connect",
-        "description": "Connects the client to the configured host:port"
+      "start": {
+        "command": ".start",
+        "usage": "Usage: .start",
+        "description": "Starts the socket server if it isn' already running"
       },
-      "disconnect": {
-        "command": ".disconnect",
-        "usage": "Usage: .disconnect",
-        "description": "Disconnect the socket if it is running"
+      "stop": {
+        "command": ".stop",
+        "usage": "Usage: .stop",
+        "description": "Stop the socket server if it is running"
+      },
+      "clients": {
+        "command": ".clients",
+        "usage": "Usage: .clients",
+        "description": "Shows the list of connected clients in json format"
       },
       "threads": {
         "command": ".threads",
