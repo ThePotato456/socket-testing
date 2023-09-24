@@ -1,42 +1,46 @@
 {
-    "host": "127.0.0.1",
-    "port": "8001",
-    "username": "",
-    "commands": {
-      "exit": {
-        "command": ".exit",
-        "usage": "Usage: .exit",
-        "description": "Exits the program immediately, cleaning up if it was running"
-      },
-      "help": {
-        "command": ".help",
-        "usage": "Usage: .help",
-        "description": "Shows this message"
-      },
-      "start": {
-        "command": ".start",
-        "usage": "Usage: .start",
-        "description": "Starts the socket server if it isn' already running"
-      },
-      "stop": {
-        "command": ".stop",
-        "usage": "Usage: .stop",
-        "description": "Stop the socket server if it is running"
-      },
-      "clients": {
-        "command": ".clients",
-        "usage": "Usage: .clients",
-        "description": "Shows the list of connected clients in json format"
-      },
-      "threads": {
-        "command": ".threads",
-        "usage": "Usage: .threads",
-        "description": "Shows the threads being used in json format"
-      },
-      "config": {
-        "command": ".config",
-        "usage": "Usage: .config",
-        "description": "Shows the currently loaded configuration values"
-      }
+  "host": "192.168.1.122",
+  "port": "8001",
+  "commands": {
+    "exit": {
+      "command": ".exit",
+      "usage": "Usage: .exit",
+      "description": "Exits the program immediately, cleaning up if it was running"
+    },
+    "help": {
+      "command": ".help",
+      "usage": "Usage: .help",
+      "description": "Shows this message"
+    },
+    "start": {
+      "command": ".start",
+      "usage": "Usage: .start",
+      "description": "Starts the socket server if it isn' already running"
+    },
+    "stop": {
+      "command": ".stop",
+      "usage": "Usage: .stop",
+      "description": "Stop the socket server if it is running"
+    },
+    "clients": {
+      "command": ".clients",
+      "usage": "Usage: .clients",
+      "description": "Shows the list of connected clients in json format"
+    },
+    "threads": {
+      "command": ".threads",
+      "usage": "Usage: .threads",
+      "description": "Shows the threads being used in json format"
+    },
+    "config": {
+      "command": ".config",
+      "usage": "Usage: .config",
+      "description": "Shows the currently loaded configuration values"
+    },
+    "status": {
+      "command": ".status",
+      "usage": "Usage: .status",
+      "description": "Shows the status of the server"
     }
   }
+}

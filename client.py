@@ -27,19 +27,69 @@ def load_config():
         return json.load(open('./client.json', 'r'))
 
 class Client:
-    def __init__(self):
-        self.config = load_config()
-        self.client_socket: socket.socket = None
-        self.threads = []
+    def __init__(self, config=None):
+        if config is None:
+            printe(f"No configuration specified")
+            exit(2)
+        self.config = config
+        self.running = False
+        self.thread: threading.Thread = None
+        self.client_socket: socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_address = None
+
+    def loop(self):
+        if not self.client_socket is None:
+            self.running = True
+            while True:
+                try:
+                    message = input(f"{self.server_address[0]}:{self.server_address[1]}$>")
+                    message_encoded = message.encode('utf-8')
+                    data = self.client_socket.recv(1024).decode()
+                    if not data:
+                        break
+                    prints(f"Recevied: {data}")
+                except KeyboardInterrupt:
+                    self.disconnect()
+                except Exception as e:
+                    printe(f"An error has occured: {e}")
+                    exit(2)
 
     def connect(self):
-        pass
-    
+        if not self.client_socket is None:
+            self.server_address = (self.config['host'], int(self.config['port']))
+            
+            #Attempt to connect to the server
+            printi(f"Attempting to connect to: {self.config['host']}:{int(self.config['port'])}")
+            try:
+                self.client_socket.connect((self.config['host'], int(self.config['port'])))
+                # Create a new thread to handle the client connection
+                self.thread: threading.Thread = threading.Thread(target=self.loop, args=())
+                # Start the thread if it exists
+                if not self.thread is None: self.thread.start()
+            except Exception as e:
+                printe(f"An error occured: {e}")
+                exit(2)
+            
     def disconnect(self):
-        pass
+        if not self.client_socket is None:
+            printi((f'Disconnecting from {self.server_address[0]}:{self.server_address[1]}'))
+            
+            # Close the connection from the server but dont close the program itself
+            self.client_socket.close()
+            self.client_socket: socket.socket = None
+            
+            printi(f"Disconnected from {self.server_address[0]}:{self.server_address[1]}")
     
     def cleanup(self):
-        pass
+        try:
+            if not self.client_socket is None:
+                self.client_socket.close()
+                self.client_socket: socket.socket = None
+            if not self.thread is None:
+                self.thread.join()
+                self.thread: threading.Thread = None
+        except Exception as e:
+            printe(f'An exception has occured during cleanup: {e}')
 
 def main():
     try:
@@ -51,12 +101,17 @@ def main():
             command = command_input
             args = command_input.split(' ')[1:]
             
-            if config['commands']['help']['command'] in command:
+            if command == config['commands']['connect']['command']:
+                if client is None:
+                    client = Client(config=config)
+                    client.connect()
+                else:
+                    printe(f"Client is already connected to {client.server_address[0]}:{client.server_address[1]}")
+                    prints(f"{config['commands']['connect']['usage']}")     
+            elif config['commands']['help']['command'] in command:
                 if len(args) == 0:
                     for cmd in config['commands']:
                         prints(f"\t{config['commands'][cmd]['command']}\t{config['commands'][cmd]['description']}")
-                        #printi(f"\tDescription: {config['commands'][cmd]['command']}")
-                        #printi(f"\tUsage:        {config['commands'][cmd]['usage']}")
                     printi(f"Type '.help <command name> to find out more information on the usage'")
                 else:
                     try:
@@ -72,12 +127,9 @@ def main():
                 exit(1)
             elif command == config['commands']['threads']['command']:
                 if not client is None:
-                    if client.threads > 0:
-                        printi("Threads:")
-                        thread_index = 0
-                        for thread_obj in client.threads:
-                            thread_index += 1
-                            prints(f"\tthread[{thread_index}]({thread_obj['type']})",)
+                    if not client.thread is None:
+                        printi("Thread:")
+                        prints(f"\nrunning = {client.running})",)
                     else:
                         printe(f"No threads currently running, have you connected to the server?")
                 else:
