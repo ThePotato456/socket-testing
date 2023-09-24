@@ -82,9 +82,15 @@ def main():
                         printe(f"No threads currently running, have you connected to the server?")
                 else:
                     printe(f"Client isn't currently connected, connect  it with {config['commands']['connect']['command']}")
+            elif command == config['commands']['config']['command']:
+                if not config is None:
+                    printi(f"Currently loaded configuration")
+                    for key, value in dict(config).items():
+                        if not key == 'commands':
+                            prints(f"\t{key} = {value}")
             else:
                 printe(f"Unknown command {command}, use .help to find out commands and their usages")
-                
+            
             """elif command == config['commands']['status']['command']:
                 if not server is None:
                     printi(f"Server Status:")

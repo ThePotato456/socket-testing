@@ -32,6 +32,11 @@
         "command": ".threads",
         "usage": "Usage: .threads",
         "description": "Shows the threads being used in json format"
+      },
+      "config": {
+        "command": ".config",
+        "usage": "Usage: .config",
+        "description": "Shows the currently loaded configuration values"
       }
     }
   }

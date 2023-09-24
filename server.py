@@ -218,6 +218,12 @@ def main():
                 if not server is None:
                     server.cleanup()
                 exit(1)
+            elif command == config['commands']['config']['command']:
+                if not config is None:
+                    printi(f"Currently loaded configuration")
+                    for key, value in dict(config).items():
+                        if not key == 'commands':
+                            prints(f"\t{key} = {value}")
             else:
                 printe(f"Unknown command {command}, use .help to find out commands and their usages")
     except KeyboardInterrupt as ke:
