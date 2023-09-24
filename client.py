@@ -23,7 +23,7 @@ def load_config():
     else:
         with open('./config/client.default.json', 'r') as default:
             with open('./config/client.json', 'w+') as config:
-                json.dump(json.load(default), indent=2)
+                json.dump(config, json.load(default), indent=2)
                 config.close()
             default.close()
         return json.load(open('./config/client.json', 'r'))

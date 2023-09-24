@@ -10,22 +10,20 @@ printe = lambda *a, **kw: print(f' {Style.BRIGHT}[{Fore.LIGHTRED_EX}-{Fore.RESET
 prints = lambda *a, **kw: print(f' {Style.BRIGHT}[{Fore.LIGHTGREEN_EX}+{Fore.RESET}]', *a, **kw)
 
 def load_config():
-    if not os.path.exists('./config'): os.mkdir('./config')
-    
-    if os.path.exists('./config/server.json'):
+    if os.path.exists('./config.json'):
         try:
-            config = json.load(open('./config/server.json', 'r'))
+            config = json.load(open('./server.json', 'r'))
             prints(f"Configuration successfully loaded")
             return config
         except Exception as e:
             printe(f"Error: {e}")
     else:
-        with open('./config/server.default.json', 'r') as default:
-            with open('./config/server.json', 'w+') as config:
-                json.dump(json.load(default), indent=2)
+        with open('./config.server.default.json', 'r') as default:
+            with open('./server.json', 'w+') as config:
+                json.dump(config, json.load(default), indent=2)
                 config.close()
             default.close()
-        return json.load(open('./config/server.json', 'r'))
+        return json.load(open('./server.json', 'r'))
 
 class Server():
     def __init__(self):
