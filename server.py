@@ -18,7 +18,7 @@ def load_config():
         except Exception as e:
             printe(f"Error: {e}")
     else:
-        with open('./config.default.json', 'r') as default:
+        with open('./config.server.default.json', 'r') as default:
             with open('./config.json', 'w+') as config:
                 json.dump(json.load(default), indent=2)
                 config.close()
