@@ -1,0 +1,41 @@
+{
+  "host": "127.0.0.1",
+  "port": "8001",
+  "commands": {
+    "exit": {
+      "command": ".exit",
+      "usage": ".exit",
+      "description": "Exits the program immediately, cleaning up if it was running"
+    },
+    "help": {
+      "command": ".help",
+      "usage": ".help",
+      "description": "Shows this message"
+    },
+    "start": {
+      "command": ".start",
+      "usage": ".start",
+      "description": "Starts the socket server if it isn' already running"
+    },
+    "stop": {
+      "command": ".stop",
+      "usage": ".stop",
+      "description": "Stop the socket server if it is running"
+    },
+    "status": {
+      "command": ".status",
+      "usage": ".status",
+      "description": "Check the status of the socket server"
+    },
+    "clients": {
+      "command": ".clients",
+      "usage": ".clients",
+      "description": "Shows the list of connected clients in json format"
+    },
+    "threads": {
+      "command": ".threads",
+      "usage": ".threads",
+      "description": "Shows the threads being used in json format"
+    }
+  }
+}
